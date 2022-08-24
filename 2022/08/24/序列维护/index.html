@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shelter Prime">
+
+
+
+
+
+<title>序列维护 | Shelter&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">序列维护</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shelter Prime</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">八月 24, 2022&nbsp;&nbsp;21:13:47</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/OI/">OI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>大坑，填起来比较辛苦，可能慢点。</p>
+<p>一直没时间写，估计抽个集训的空就完成了。（然而已经弃坑了）</p>
+<p>比较毒瘤，食用前请确保基础数据结构掌握得差不多了，不然回去学完线性表再来（）</p>
+<h2 id="乱入的优先队列"><a href="#乱入的优先队列" class="headerlink" title="乱入的优先队列"></a>乱入的优先队列</h2><p>一句话优先队列：往一个队列里边扔数，它自动给你排好序等你使用。</p>
+<p>来一个十分简（bian）单（tai）的例题：</p>
+<p>给定一个正数序列，求第 $k$ 小的子区间和。</p>
+<p>$n \le 100000$</p>
+<p>你跟我讲你不知道什么是子区间……</p>
+<ul>
+<li>子区间：连续的。</li>
+<li>子序列：不连续的。</li>
+</ul>
+<p><del>扫盲工作有了大进展。</del></p>
+<p><del>懵了没有？我早就料到了哈哈哈，你的招式不过如此！</del></p>
+<p>请先克制住把我按在地上暴揍的心理，现在我把这题做法告诉你你的招式不就也上来了嘛。</p>
+<p>首先分析题目性质：这个序列是<strong>正数</strong>。</p>
+<p><strong>正数！正数！正数！</strong></p>
+<p>也就是说，我们选一个长度小的区间的和肯定比长度大的区间的和要小。</p>
+<p>最小的，一定就是形如 $[i, i]$ 这样的区间了。</p>
+<p>（<del>都学到这了还不知道左闭右开和左闭右闭就去自闭吧</del>）。</p>
+<p>记 $S[l, r]$ 为区间 $l \to r$ 的和。</p>
+<p>你一定看得出：$S[l-1, r] \ge S[l, r]$， $S[l, r+1] \ge S[l, r]$。</p>
+<p>我们掏出一个堆，先加进去 $[1, 1] \dots [n, n]$ 区间和。</p>
+<p>找到一个最小的，然后从这个区间去像上面的左右拓展，找出第二小的区间，以此类推。</p>
+<p>记住疯狂塞到堆里边。</p>
+<p>最后记住，来个 $\mathtt{map}$ 和 $\mathtt{pair}$ 的联动，去重用，我们不能计算重复的区间。</p>
+<p><del>你要代码？我都写这么清楚了居然还要代码！</del></p>
+<p>好吧……既然你们仍然是一脸懵逼，我还是写一下吧：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100005</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这以上看不懂的回去复习第一部分吧</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 优先队列的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> sum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造一个函数，不要问我为什么这么写，为什么可以写一样的</span></span><br><span class="line">    <span class="comment">// 鬼知道 C++ 的语法是森莫东东</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">long</span> <span class="keyword">long</span> sum) : <span class="built_in">l</span>(l), <span class="built_in">r</span>(r), <span class="built_in">sum</span>(sum) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这是重载了一个小根堆</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Node &amp;a) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sum &gt; a.sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[N], k;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是判重用的</span></span><br><span class="line">map &lt;pair &lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">bool</span>&gt; ds;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 背不过？会读就会写，欧耶</span></span><br><span class="line">priority_queue &lt;Node&gt; q;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码风格所迫……</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 压入队列中，就像之前所说的那样</span></span><br><span class="line">        q.<span class="built_in">push</span>(<span class="built_in">Node</span>(i, i, a[i]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码风格所迫……</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 去找第 k 小的区间</span></span><br><span class="line">    <span class="keyword">while</span>(k--) &#123;</span><br><span class="line">        <span class="comment">// 掏出来最小的</span></span><br><span class="line">        Node t = q.<span class="built_in">top</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 炸了它()</span></span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果我们来过这里</span></span><br><span class="line">        <span class="keyword">if</span>(ds[pair &lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; (t.l, t.r)]) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 一定要给它续一条命！</span></span><br><span class="line">            <span class="comment">// 因为你要是再回去，你没有去找区间</span></span><br><span class="line">            <span class="comment">// 但是你 while 里边减了 k!</span></span><br><span class="line">            <span class="comment">// 所以要给它续命！</span></span><br><span class="line">            k++;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 标记掉</span></span><br><span class="line">        ds[pair &lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; (t.l, t.r)] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 你不能拓展出去</span></span><br><span class="line">        <span class="keyword">if</span>(t.l != <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拓展之</span></span><br><span class="line">            q.<span class="built_in">push</span>(<span class="built_in">Node</span>(t.l - <span class="number">1</span>, t.r, t.sum + a[t.l - <span class="number">1</span>]));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 同理</span></span><br><span class="line">        <span class="keyword">if</span>(t.r != n) &#123;</span><br><span class="line">            q.<span class="built_in">push</span>(<span class="built_in">Node</span>(t.l, t.r + <span class="number">1</span>, t.sum + a[t.r + <span class="number">1</span>]));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出你当前找到的区间</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>, t.l, t.r, t.sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">inp</span>();</span><br><span class="line">    <span class="built_in">work</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h2><p>前缀和是什么？</p>
+<p>一个序列，定义一个 $pre$ 数组，$pre[i]$ 为前 $i$ 个数的和，查询一个区间 $[l, r]$ 的时候，只需要 $pre[r] - pre[l - 1]$。</p>
+<p>那这玩意如何计算呢？</p>
+<p>异常简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    pre[i] = pre[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二维的东西……这东西是需要画图的，不过我觉得脑补应该可以吧……如果你非要看图（<del>我是不会画的</del>）就使用 gfs（google first search）。</p>
+<p>差分又是什么呢？</p>
+<p>差分数组的定义：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pre[i] = a[i] - a[i<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>差分能干什么？</p>
+<p>比如说：</p>
+<p>有些东西直接统计起来，凉凉 TLE。</p>
+<p>但是如果具有可减性，就可以使用差分来降低时间复杂度。</p>
+<p>完美。</p>
+<h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><p>现在，我给定一个序列，需要您写出一个数据结构，支持以下操作：</p>
+<ol>
+<li>在第 $x$ 的位置上加上 $y$。</li>
+<li>给出 $x$ 的前缀和。</li>
+</ol>
+<p>现在该如何是好呢？</p>
+<p>如果您使用数组，您得先统计一遍前缀和，恭喜您，我修改了序列，于是您又去改一遍前缀和，然后我接着修改序列……</p>
+<p>有常识的人都知道，TLE 在所难免了。</p>
+<p>这种数据结构需要什么特点？</p>
+<ul>
+<li>树形结构的每个节点表示一个子集。</li>
+<li>为了高效修改，每个序列上的位置只出现在少数个树形结构的节点上。</li>
+<li>为了查询高效，对任意查询，可以通过少数个树形结构的节点拼出来。</li>
+</ul>
+<p>那么，有没有数据结构能来就我们一命？</p>
+<p>树状数组可以满足您的要求。</p>
+<p>树状数组是个什么东西？</p>
+<p>剑鱼这东西实在毒瘤，于是我盗了 noip 的图，不过这是我氪了金的应该算是正常使用吧……</p>
+<p>假设一个序列：$A[1] \sim A[8]$，用 $C[]$ 表示树状数组。</p>
+<p>$C[x]$ 表示 $A[x - 2^k + 1, x]$ 这个区间的和，$k$ 是表示 $x$ 的二进制表示中第一位的 1。</p>
+<p>蛤？</p>
+<p>比如说，6，二进制表示 110。</p>
+<p>则，k 就是 1。$2^k$ 就是 2。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/v8ygf8il.png"></p>
+<p>那么这玩意怎么求呢？难不成我还要去位运算？</p>
+<p>恭喜您，答对了，给您加 10 分。</p>
+<p>极其简单，一句话就可以求出 $2^k$：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x &amp; -x)</span><br></pre></td></tr></table></figure>
+
+<p>我们如何去构建一个树状数组？</p>
+<p>根据我们之前说过的一堆东西，我们可以提前根据我们手中的数据数组去构造。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> c[])</span> </span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="built_in">lowbit</span>(i)+<span class="number">1</span>; j&lt;=i; j++) &#123;</span><br><span class="line">			c[i] = c[i] + t[j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们查询一个前缀的和，可以用 $O(\log n)$ 个树状数组的节点拼起来，然后成功拼出这个前缀。</p>
+<p>求法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i; i-=<span class="built_in">lowbit</span>(i)) &#123;</span><br><span class="line">        s += c[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 $x$ 的位置上加上 $y$。</p>
+<p>你会发现，在 $x$ 前面的结点是不会收到影响的，只有后面的结点才会被影响。</p>
+<p>存储输入数据的数组好说，直接一加就行了，但是树状数组里边怎么办呢？</p>
+<p>因为之前的和它半毛钱关系都没有，我们直接从 $x$ 和它以后的那些点进行修改就可以了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    t[x] += y;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i&lt;=n; i+=<span class="built_in">lowbit</span>(i)) &#123;</span><br><span class="line">        c[i] += y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><del>树状数组就这么点东西了。</del></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3374">P3374</a>，模板题。</p>
+<p>Code</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[N];</span><br><span class="line"><span class="keyword">int</span> n, t[N], m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i; i-=<span class="built_in">lowbit</span>(i)) &#123;</span><br><span class="line">        ans += c[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    t[x] += y;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x; i&lt;=n; i+=<span class="built_in">lowbit</span>(i)) &#123;</span><br><span class="line">        c[i] += y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> c[])</span> </span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(c));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i-<span class="built_in">lowbit</span>(i)+<span class="number">1</span>; j&lt;=i; j++) &#123;</span><br><span class="line">			c[i] = c[i] + t[j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">init</span>(c);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> opt, x, y;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;opt, &amp;x, &amp;y);</span><br><span class="line">		<span class="keyword">if</span>(opt == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="built_in">modify</span>(x, y);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">find</span>(y)-<span class="built_in">find</span>(x<span class="number">-1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">inp</span>();</span><br><span class="line">	<span class="built_in">work</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shelter Prime</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://dxrprime.github.io/2022/08/24/%E5%BA%8F%E5%88%97%E7%BB%B4%E6%8A%A4/">http://dxrprime.github.io/2022/08/24/%E5%BA%8F%E5%88%97%E7%BB%B4%E6%8A%A4/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Data-Structure/"># Data Structure</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/24/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+            
+            
+            <a class="next" rel="next" href="/2022/08/24/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">  
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: '', 
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true  
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

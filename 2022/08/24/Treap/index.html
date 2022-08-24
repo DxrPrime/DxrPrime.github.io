@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shelter Prime">
+
+
+
+
+
+<title>Treap | Shelter&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Treap</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shelter Prime</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">八月 24, 2022&nbsp;&nbsp;21:13:47</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/OI/">OI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><p>请先学会 BST，如果没有弄会 BST 的话建议去<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/Minecraft886/post-bst">这里</a>。</p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>书接上回，我们在 BST 的结尾留下了一个问题：如何将 BST 弄平衡？</p>
+<p>答案是：弄成一颗平衡二叉搜索树！以后我们就将其简称为平衡树。</p>
+<p>平衡树有很多类型，今天我们介绍一种入门级的平衡树——Treap。</p>
+<p><del>写一天博文都快累死了。</del></p>
+<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><p>Treap 是 Tree + Heap 的合成词。</p>
+<p>我们都知道，满足 BST 性质且中序遍历为相同序列的二叉查找树并不唯一，也就是不管这些树内部是什么样的，它们都是等价的，所以我们可以在满足 BST 性质的前提下对这个 BST 做一些事情，改变它的形态，使每个节点的左右子树达到平衡，这样整棵树的深度都维持在 $\mathcal{O}(\log n)$，这样时间复杂度就好说了。</p>
+<p>基本上改变 BST 的基本操作就是<strong>旋转</strong>，最基本的旋转就是“单旋转”，单旋转又分为左旋和右旋，这里的左旋右旋操作都统一对“旋转前处于父节点位置”的节点执行左右旋操作。</p>
+<p>我们拿右旋来举例吧：（图我不想找了，大家上网找张图看吧）</p>
+<p>初始情况下，$x$ 是  $y$ 的左子节点，A 和 B 分别是 $x$ 的左右子树，C 是 $y$ 的右子树。</p>
+<p>$x$ 要变成 $y$ 的父亲，因为 $x$ 的关键值比 $y$ 的小，因此 $y$ 要作为 $x$ 的右子节点，那么 B 就没有位置了，因此要把 B 设为 $y$ 的左子节点，A 的位置并没有被占据，继续当 $x$ 的左子树就好了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zig</span><span class="params">(<span class="keyword">int</span> &amp;p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q = a[p].l;</span><br><span class="line">    a[p].l = a[q].r, a[q].r = p;</span><br><span class="line">    p = q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zag</span><span class="params">(<span class="keyword">int</span> &amp;p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q = a[p].r;</span><br><span class="line">    a[p].r = a[q].l, a[q].l = p;</span><br><span class="line">    p = q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>左旋也是一样的道理。</p>
+<p>合理的旋转可以让 BST 变得很平衡，怎样才能干出合理的旋转呢？</p>
+<p>我们发现，在随机数据下 BST 是趋近平衡的，Treap 的思想就是利用“随机”来创造平衡，旋转的时候必须维持 BST 性质，因此我们就只好用堆性质来搞了。在插入新节点的时候，随机生成一个额外的权值，如果某个节点不满足大根堆性质的话，就旋转。</p>
+<p>删除的时候，因为 Treap 支持旋转，为了避免节点信息更新，堆性质维护等复杂问题，我们找到要删除的节点之后把它向下旋转成叶子节点，然后直接删除。</p>
+<p>Treap 的检查，插入，求前驱后继和删除节点的时间复杂度都是 $\mathcal{O}(\log n)$ 的。</p>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p>有生之年终于来例题了啊！</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">P3369</a></p>
+<p>有相同的值啊，我们给每个节点加一个 $cnt$，表示这个节点上的值有多少个，又要查询排名，我们可以加一个 $siz$，记录以该节点为根的子树中所有节点的 $cnt$ 和，如果不存在重复的 $cnt$ 的话，$siz$ 就是子树大小。记住插入和删除以及旋转的时候修改下 $siz$ 就好辣！</p>
+<p>我不想写注释了，不懂直接问吧，我已经学了整整一天平衡树了不想思考了:(。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &lt; <span class="string">&#x27;0&#x27;</span> || c &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Treap</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    <span class="keyword">int</span> val, dat;</span><br><span class="line">    <span class="keyword">int</span> cnt, siz;</span><br><span class="line">&#125;a[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot, rt;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">New</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    a[++tot].val = val;</span><br><span class="line">    a[tot].dat = <span class="built_in">rand</span>();</span><br><span class="line">    a[tot].cnt = a[tot].siz = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">upd</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    a[p].siz = a[a[p].l].siz + a[a[p].r].siz + a[p].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* int get(int p, int val) &#123;</span></span><br><span class="line"><span class="comment">    if(p == 0) return 0;</span></span><br><span class="line"><span class="comment">    if(val == a[p].val) return p;</span></span><br><span class="line"><span class="comment">    return val &lt; a[p].val ? get(a[p].l, val) : get(a[p].r, val);</span></span><br><span class="line"><span class="comment">&#125; */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_rk</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(val == a[p].val) <span class="keyword">return</span> a[a[p].l].siz + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(val &lt; a[p].val) <span class="keyword">return</span> <span class="built_in">get_rk</span>(a[p].l, val);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">get_rk</span>(a[p].r, val) + a[a[p].l].siz + a[p].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_val</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> rk)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="number">0</span>) <span class="keyword">return</span> INF;</span><br><span class="line">    <span class="keyword">if</span>(a[a[p].l].siz &gt;= rk) <span class="keyword">return</span> <span class="built_in">get_val</span>(a[p].l, rk);</span><br><span class="line">    <span class="keyword">if</span>(a[a[p].l].siz + a[p].cnt &gt;= rk) <span class="keyword">return</span> a[p].val;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">get_val</span>(a[p].r, rk - a[a[p].l].siz - a[p].cnt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zig</span><span class="params">(<span class="keyword">int</span> &amp;p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q = a[p].l;</span><br><span class="line">    a[p].l = a[q].r, a[q].r = p;</span><br><span class="line">    p = q;</span><br><span class="line">    <span class="built_in">upd</span>(a[p].r), <span class="built_in">upd</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zag</span><span class="params">(<span class="keyword">int</span> &amp;p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q = a[p].r;</span><br><span class="line">    a[p].r = a[q].l, a[q].l = p;</span><br><span class="line">    p = q;</span><br><span class="line">    <span class="built_in">upd</span>(a[p].l), <span class="built_in">upd</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="number">0</span>) &#123;</span><br><span class="line">        p = <span class="built_in">New</span>(val);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(val == a[p].val) &#123;</span><br><span class="line">        ++a[p].cnt, <span class="built_in">upd</span>(p);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(val &lt; a[p].val) &#123;</span><br><span class="line">        <span class="built_in">ins</span>(a[p].l, val);</span><br><span class="line">        <span class="keyword">if</span>(a[p].dat &lt; a[a[p].l].dat) <span class="built_in">zig</span>(p);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">ins</span>(a[p].r, val);</span><br><span class="line">        <span class="keyword">if</span>(a[p].dat &lt; a[a[p].r].dat) <span class="built_in">zag</span>(p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">upd</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_nxt</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> p = rt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[p].val == val) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[p].r &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                p = a[p].r;</span><br><span class="line">                <span class="keyword">while</span>(a[p].l &gt; <span class="number">0</span>) p = a[p].l;</span><br><span class="line">                ans = p;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[p].val &gt; val &amp;&amp; a[p].val &lt; a[ans].val) ans = p;</span><br><span class="line">        p = val &lt; a[p].val ? a[p].l : a[p].r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[ans].val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_pre</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> p = rt;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        <span class="keyword">if</span>(val == a[p].val) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[p].l &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                p = a[p].l;</span><br><span class="line">                <span class="keyword">while</span>(a[p].r &gt; <span class="number">0</span>) p = a[p].r;</span><br><span class="line">                ans = p;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(a[p].val &lt; val &amp;&amp; a[p].val &gt; a[ans].val) ans = p;</span><br><span class="line">        p = val &lt; a[p].val ? a[p].l : a[p].r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[ans].val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="number">0</span>) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(val == a[p].val) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[p].cnt &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            --a[p].cnt, <span class="built_in">upd</span>(p);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[p].l || a[p].r) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[p].r == <span class="number">0</span> || a[a[p].l].dat &gt; a[a[p].r].dat) <span class="built_in">zig</span>(p), <span class="built_in">del</span>(a[p].r, val);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">zag</span>(p), <span class="built_in">del</span>(a[p].l, val);</span><br><span class="line">            <span class="built_in">upd</span>(p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    val &lt; a[p].val ? <span class="built_in">del</span>(a[p].l, val) : <span class="built_in">del</span>(a[p].r, val);</span><br><span class="line">    <span class="built_in">upd</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">srand</span>((<span class="keyword">int</span>)<span class="built_in">time</span>(<span class="number">0</span>));</span><br><span class="line">    n = <span class="built_in">rd</span>();</span><br><span class="line">    <span class="built_in">New</span>(-INF);</span><br><span class="line">    <span class="built_in">New</span>(INF);</span><br><span class="line">    rt = <span class="number">1</span>, a[<span class="number">1</span>].r = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">upd</span>(rt);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(n--) &#123;</span><br><span class="line">        <span class="keyword">int</span> opt = <span class="built_in">rd</span>(), x = <span class="built_in">rd</span>();</span><br><span class="line">        <span class="keyword">if</span>(opt == <span class="number">1</span>) <span class="built_in">ins</span>(rt, x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">2</span>) <span class="built_in">del</span>(rt, x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">get_rk</span>(rt, x) - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">get_val</span>(rt, x + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">5</span>) <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">get_pre</span>(x));</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">get_nxt</span>(x));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shelter Prime</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://dxrprime.github.io/2022/08/24/Treap/">http://dxrprime.github.io/2022/08/24/Treap/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Data-Structure/"># Data Structure</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/24/Tarjan%20%E4%B8%8E%20DAG/">有向图上的 Tarjan</a>
+            
+            
+            <a class="next" rel="next" href="/2022/08/24/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">  
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: '', 
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true  
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
