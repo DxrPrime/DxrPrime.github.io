@@ -60,7 +60,7 @@ class GitalkComponent extends Component {
       pagerDirection: 'last', // last or first
       createIssueManually: false,
       distractionFreeMode: false,
-      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+      proxy: 'https://dxrprime.the-last-prime.workers.dev/?https://github.com/login/oauth/access_token',
       flipMoveOptions: {
         staggerDelayBy: 150,
         appearAnimation: 'accordionVertical',
