@@ -13,7 +13,7 @@
 
 
 
-<title>Shelter&#39;s Blog</title>
+<title>Category: Blog | Shelter&#39;s Blog</title>
 
 
 
@@ -161,73 +161,49 @@
     }
 </script>
             <div class="main">
-                
-    <div class="container profile-container">
-    <div class="intro">
-        <div class="avatar">
-            <a href="/archives"><img src="/image/avatar.jpeg"></a>
-        </div>
-        <div class="nickname">Shelter Prime</div>
-        <div class="description"><p>浪得虚名之人</p>
-</div>
-        <div class="links">
-            
-                
-                    <a class="link-item" title="Blog" href="/archives">
-                        
-                        
-                            <i class="iconfont icon-blog"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Category" href="/category">
-                        
-                        
-                            <i class="iconfont icon-category"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Tags" href="/tag">
-                        
-                        
-                            <i class="iconfont icon-tags"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Link" href="/Notice">
-                        
-                        
-                            <i class="iconfont icon-link"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="FaceBook" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=100082825023566">
-                        
-                        
-                            <i class="iconfont icon-facebook"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Twitter" target="_blank" rel="noopener" href="https://twitter.com/DxrPrime">
-                        
-                        
-                            <i class="iconfont icon-twitter"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Github" target="_blank" rel="noopener" href="https://github.com/DxrPrime">
-                        
-                        
-                            <i class="iconfont icon-github"></i>
-                        
-                    </a>
-                
-            
-        </div>
-    </div>
-</div>
+                <div class="container">
+    <article class="post-wrap page">
+        
+        <h2 class="post-title">Notice</h2>
+        
+        <section class="post-content">
+            <p>这里是一些关于本 Blog 的有关事项，建议您仔细阅读。</p>
+<h2 id="关于评论区"><a href="#关于评论区" class="headerlink" title="关于评论区"></a>关于评论区</h2><p>由于本人所处位置网络环境过于哔——，因此我无法及时开启 Issue 评论，可能好几个月之后会一并开启。</p>
+<p>如果您发现评论区出现了 Network Error 的错误，那……您可能需要一些妙不可言的手段方可正常评论。如果实在无法评论可以去洛谷私信解决问题。</p>
+<h2 id="关于首页的各种媒体链接"><a href="#关于首页的各种媒体链接" class="headerlink" title="关于首页的各种媒体链接"></a>关于首页的各种媒体链接</h2><p>目前有 Facebook，Twitter 和 GitHub，将来会增加 WeChat ，QQ， YouTube 和知乎。</p>
+<p>预计几个月后添加完上述内容。</p>
+<p>加 WeChat 和 QQ 时请<strong>一定</strong>要注明您的身份和目的！否则一律不予通过。</p>
+<h2 id="关于博文的更新问题"><a href="#关于博文的更新问题" class="headerlink" title="关于博文的更新问题"></a>关于博文的更新问题</h2><p>由于网络环境，本人一天只能更新一次博文，因此错误可能修改不及时，还请各位海涵。</p>
+<p>之前的部分出锅的数学公式的修改暂未提上日程，请各位海涵（。</p>
 
-
+        </section>
+    </article>
+</div>
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/gitalk/dist/gitalk.css">  
+<script src="/gitalk/dist/gitalk.min.js"></script>  
+<script src="/md5.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '0b0585b5051899c872936313348f9531451f6242',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: md5(location.pathname),
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true,  
+ proxy: 'https://dxrprime.the-last-prime.workers.dev/?https://github.com/login/oauth/access_token',
+ title: 'DxrPrime Shelter Comments'
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+   
             </div>
             <footer id="footer" class="footer">
     <div class="copyright">
