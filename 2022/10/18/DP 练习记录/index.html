@@ -280,8 +280,7 @@
 <p>现在我们已知了可以到达的边，去枚举这些边，然后判断是否可以凑出这三条边，再看能否围成三角形，最后统计答案输出即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = sum &gt;&gt; <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = sum &gt;&gt; <span class="number">1</span>; k &gt;= <span class="number">0</span>; --k) &#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt;= a[i]) dp[j][k] |= dp[j - a[i]][k];</span><br><span class="line">                <span class="keyword">if</span>(k &gt;= a[i]) dp[j][k] |= dp[j][k - a[i]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> ans = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = sum; i &gt; <span class="number">0</span>; --i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = sum; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!dp[i][j]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">is_ok</span>(i, j, sum - i - j)) <span class="keyword">continue</span>;</span><br><span class="line">            ans = <span class="built_in">max</span>(ans, <span class="built_in">calc</span>(i, j, sum - i - j));</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1133">P1133</a></p>
-<p>首先分析题意，可以得出线性 DP。</p>
+<h2 id="P1133"><a href="#P1133" class="headerlink" title="P1133"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1133">P1133</a></h2><p>首先分析题意，可以得出线性 DP。</p>
 <p>一维肯定不够，我们需要知道上一个子问题状态选择了哪一棵树，因此加上一维，这样最初的状态就变成了：$dp_{i, \ 0/1/2}$，表示到了第 i 个位置，放高度为 10，高度为 1，高度为 2 的树的最大收益。</p>
 <p>坑人的是，我们依旧无法转移，因为我们没办法知道这个树是比左右都低还是比左右都高。</p>
 <p>那就，再塞进去一维！</p>
@@ -412,6 +411,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/">2022.10.27 整理</a>
             
             
             <a class="next" rel="next" href="/2022/10/14/2022.10.12%E6%95%B4%E7%90%86/">2022.10.12 整理</a>

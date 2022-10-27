@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shelter Prime">
+
+
+
+
+
+<title>2022.10.27 整理 | Shelter Prime&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">2022.10.27 整理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shelter Prime</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 27, 2022&nbsp;&nbsp;19:24:27</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/OI/">OI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p>算是第一次线下做 S 组模拟题吧（其实并不知道具体难度是在 S 还是在省选，不过个人感觉就是个 S 组，虽然只有三个题），但是我就相当于一个旁观者，所以也没有测评代码，纯属自行估分。</p>
+<p>感觉自己不会的东西还是非常多的，比如数据结构会但是想不到怎么用，想正解的能力还是太差了，如果碰上个简单的 T1（指能用 BF 干对的或是稍微预处理点就行的）可能还有救，然而概率太低了。</p>
+<p>总之多写写结论题和思维题吧。</p>
+<p>开题之后通读题面，<del>断定三个题都不可做</del>，感觉 T2 比较难就先放过去，开始写 T1。</p>
+<p>研究 T1 的时候尝试加一些限制，确实在没有重复元素的情况下推出了正解并且愉快地爆碾了样例，但是再向有重复的元素扩展时没有成功，感觉单靠数学结论不大行了，就开始套 DS 去优化，然后乱搞了一顿，貌似能对（没写对拍）。</p>
+<p>T1 是个 DS，但是我处理的方法非常笨，我将 $\mathcal{O}(n^2)$ 个区间全丢进去，这样导致最后四个数据是肯定没救的，如果写对了也就 60pts，极限分了。</p>
+<p>T2 是个比较难的树上问题，是个树上差分，还是 DS，然而架不住菜，写了个 20pts 的 BF 就走了，不过这 20pts 给的是真舒适<del>如果能再多点就好了</del>。</p>
+<p>事后证明，由于太过 BF，导致全 T……嘤嘤嘤……</p>
+<p>T3 居然和 Stirling 数有关，我还在 solution 里瞅见了多项式……不过好像也就用到了证明性质，也不用手敲。T3 是单调栈然而自己过于菜导致没想到（<del>想到了也不会</del>），想了半天还是只能写个 10pts 的 BF……（这波靠 BF 活着了属于是），就死活优化不下去，后来想到了 DP（本场 contest 为数不多的和正解沾边的操作），然后试着写了写但还是挂掉了。</p>
+<p>为什么我这么<strong>菜</strong>啊！</p>
+<p>如果做法正确的话也就 90pts，不大行，任重而道远。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h3><p>思维题。</p>
+<p>看一个区间包含多少个数有点麻烦，不妨转化为看一个数在多少个区间里。这样枚举可以节省时间，非常舒适。</p>
+<p>令 $pre_i$ 表示 $a[i]$  上一次出现的位置。数据范围有点大，我就不离散化（，我直接 map，简单又舒适。</p>
+<p>对于重复的数的贡献，我们直接考虑最左边的一个，发现这个东西可以对前边 $i - pre_i$ 个区间产生贡献，也能对后边的 $n \times k - i + 1$ 个区间产生贡献。</p>
+<p>因此总答案就是 :$\sum\limits^{k \times n}_{i = 1}{(i-pre_i)\times(k\times n-i+1)}$。</p>
+<p>我们可以拆开算，发现右边的那一堆就是个等差数列，可以直接 $\mathcal{O}(1)$ 求出来，右边那一堆是不变的。</p>
+<p>需要注意，当这个数是第一次出现的时候是需要特判一下的，因为此时它需要额外把前面所有的区间的贡献全部加上。</p>
+<p>Code：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">rd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &lt; <span class="string">&#x27;0&#x27;</span> || c &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> ll inv2 = (mod + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> n; </span><br><span class="line">ll k, ans;</span><br><span class="line"><span class="keyword">int</span> a[N], b[N];</span><br><span class="line"><span class="keyword">int</span> pre[N];</span><br><span class="line"></span><br><span class="line">map &lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">bool</span> fl[N];</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(ll a, ll b, ll c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a % mod + b % mod) % mod * c % mod *inv2 % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    n = <span class="built_in">rd</span>(), k = <span class="built_in">rd</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        a[i] = <span class="built_in">rd</span>();</span><br><span class="line">        <span class="keyword">if</span>(mp.<span class="built_in">count</span>(a[i])) pre[i] = mp[a[i]];</span><br><span class="line">        <span class="keyword">else</span> fl[i] = <span class="literal">true</span>;</span><br><span class="line">        mp[a[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span>(!pre[i] &amp;&amp; mp[a[i]] != i) pre[i] = mp[a[i]];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(fl[i] &amp;&amp; !pre[i]) pre[i] = i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(fl[i]) &#123;</span><br><span class="line">            ans = (ans % mod + ( <span class="number">1ll</span> * i % mod * <span class="number">1ll</span> * (n % mod * k % mod - i + <span class="number">1</span>) % mod) % mod) % mod;</span><br><span class="line">            ans = (ans % mod + ((n + i - pre[i]) % mod * <span class="built_in">calc</span>((n % mod * (k - <span class="number">1</span>) % mod - (i - <span class="number">1</span>) % mod) % mod, n - i + <span class="number">1</span>, k - <span class="number">1</span>) % mod) % mod) % mod;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ans = (ans % mod + (i - pre[i]) % mod * <span class="built_in">calc</span>(((n % mod * k % mod - i + <span class="number">1</span>) % mod) % mod, n - i + <span class="number">1</span>, k) % mod) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fclose</span>(stdin);</span><br><span class="line">    <span class="built_in">fclose</span>(stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">2 2</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>附带对拍数据生成器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">mt19937 <span class="title">rd</span><span class="params">(time(<span class="number">0</span>))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    uniform_int_distribution &lt;<span class="keyword">int</span>&gt; <span class="built_in">rg1</span>(<span class="number">1</span>, <span class="number">1e5</span>);</span><br><span class="line">    uniform_int_distribution &lt;<span class="keyword">int</span>&gt; <span class="built_in">rg2</span>(<span class="number">1</span>, <span class="number">1e9</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = <span class="built_in">rg1</span>(rd);</span><br><span class="line">    cout &lt;&lt; n &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">rg1</span>(rd) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        cout &lt;&lt; <span class="built_in">rg2</span>(rd) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>调试之路：</p>
+<p>首先先跟丙戌年 dalao 学到了思路，顺便要到了 ACCode，然后开始钻研，然后开始写，接下来上去交了好几遍都是 30pts，气急败坏之下开始对拍，小数据都是 AC，大数据都爆炸。</p>
+<p>最后经过多次研究，发现除法不能取模，被迫写成逆元，然后拍了遍大数据发现对了，接下来就 A 掉了。</p>
+<h3 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h3><p>枚举 4 个点，得到 20 pts。</p>
+<p>预处理出长度为 p，q 的路径，再判断。</p>
+<p>判断路径相交用到 LCA，玩 tarjan 可以快点。</p>
+<p>正着求有点难受，直接正难则反吧。</p>
+<p>然后就不会了……</p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>dp，但是我听不懂……</p>
+<p>我太菜了，见谅好吧，等我研究透 Solution 再说。（也许需要很长的时间……）</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shelter Prime</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://dxrprime.github.io/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/">http://dxrprime.github.io/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>No <strong>SACRIFICE</strong>, no <strong>VICTORY</strong>!!!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/summary/"># summary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/10/18/DP%20%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95/">DP 练习记录</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/gitalk/dist/gitalk.css">  
+<script src="/gitalk/dist/gitalk.min.js"></script>  
+<script src="/md5.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '0b0585b5051899c872936313348f9531451f6242',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: md5(location.pathname),
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true,  
+ proxy: 'https://dxrprime.the-last-prime.workers.dev/?https://github.com/login/oauth/access_token',
+ title: 'DxrPrime Shelter Comments'
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
