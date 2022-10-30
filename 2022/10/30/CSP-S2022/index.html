@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shelter Prime">
+
+
+
+
+
+<title>我在 CSP-S 2022 的故逝 | Shelter Prime&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我在 CSP-S 2022 的故逝</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shelter Prime</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 30, 2022&nbsp;&nbsp;13:25:10</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/OI/">OI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h1><h2 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h2><p>整体目标：练习枚举，搜索等暴力骗分手段。</p>
+<p>上午：袁野课程，模拟，搜索， DP， 复习模板。</p>
+<p>下午：练习，然后就是 numb。</p>
+<p>晚上听 whk。</p>
+<h2 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h2><p>上午打了场洛谷月赛的 J 组，260 pts，感觉不太行。</p>
+<p>下午本来计划比赛 S 组，但是题太难了直接摆烂，学一下午 DP，结果 numb 了，晚上乱搞了点 WSL 和 gdb，挺快乐。</p>
+<p>回宿舍的时候嫖了点吃的，差点让 Ptilopsis_w 他们给玷污了。</p>
+<h2 id="Day3"><a href="#Day3" class="headerlink" title="Day3"></a>Day3</h2><p>早上和教练们共进早餐。</p>
+<p>上午学完剩下的 DP，然后开始练习，有了 SSH 感觉 WSL 太快乐了。</p>
+<p>下午计划继续听课，钻研了 2 个小时总算是弄明白了一道 DP。(菜的要死)</p>
+<p>晚上 numb 了，whk 也懒得听了。</p>
+<h2 id="Day4"><a href="#Day4" class="headerlink" title="Day4"></a>Day4</h2><p>又是和教练们共进早餐的一天呢。</p>
+<p>学习了一下状压 DP，感觉有些 numb。听了听 A* 感觉挺透彻，写了几个题还算是快乐。</p>
+<p>下午日常 numb……写了个高精愉悦身心，然后试着写状压 DP 发现写不出来（实在是太 numb了）。</p>
+<p>然后就……写了点 DS 的模板，提前学了一会 whk。</p>
+<p>写 Kruskal 的时候发现在 LiuTianyou 电脑上那个为我开的 folder 里边多了一个叫 DxrNB!!!!!! 的 txt 文件，点开以后发现里边赫然写着：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This folder is for Dxr.</span><br><span class="line">He is so NB!</span><br></pre></td></tr></table></figure>
+
+<p>az，绝了。</p>
+<p>晚上依旧 numb……</p>
+<h2 id="Day5"><a href="#Day5" class="headerlink" title="Day5"></a>Day5</h2><p>上午图论，meet-in-the-middle，生成树，最短路，分层图……</p>
+<p>下午开始疯狂切题，极度快乐。计划复习 Splay，Treap，高精度，熟练剖分，LCA，双向搜索，广搜，DAG……</p>
+<p>没写完，时间不够了，晚上就没搞 whk。</p>
+<p>晚上写了一道初中 dalao 们以前做过的模拟题，砍下了人生中第一个最优解。</p>
+<p>后来发现，这题就是个 BF。S 组模拟，但是 T1 是 BF！</p>
+<h2 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h2><p>打了一场 S 组模拟赛，感觉非常不行。</p>
+<p>中午和 Ptilopsis_w 和另一位 dalao 共进午餐。</p>
+<p>下午讲评光弄懂了个 T1，别的实在是知识点不够理解不了，还得学。</p>
+<p>晚上打各类模板，whk 直接就扔掉不管了。</p>
+<p>CSP2022 RP++……感觉蛮慌乱的。</p>
+<p>复习了一下对拍，复习了下平衡树，然后看了看历年真题感觉还挺透彻的。</p>
+<p>玩了玩 WSL，打了个 Trie 模板，放平了心态。</p>
+<p>晚上切掉了模拟五十的 T1，<del>跑的比 Ptilopsis_w 快多了</del>，总体上就是纵向做一个前缀和，横向用双指针维护一个子区间和，做两次就好了。</p>
+<p>这样就可以很方便的维护一个子矩形里边有多少个 1，十分的舒适。</p>
+<h2 id="Day7"><a href="#Day7" class="headerlink" title="Day7"></a>Day7</h2><p>最后一天了。</p>
+<p>上午敲了一堆 DS，下午考了次 S 组模拟赛。</p>
+<p>感觉考得还不错，T1 是个博弈论，很快切掉了。</p>
+<p>T2 是个比较变态的换根 DP，而且我还不会换根 DP……于是我就是用了传说中的 $n$ 遍 DFS。</p>
+<p>为了更好地处理区间加，我预先进行了树链剖分，然后接一个树上差分，但是我的树上差分能力明显不足导致调了两个小时才写出来一个 30pts 的 BF，这时候基本上只剩 10 min 了，T3 随手敲了个 10 pts 的 dfs 就完了。</p>
+<p>晚上看看了题解，加了一堆 RP，看了点技巧，玩了玩对拍，翻了翻自己的博文，准备了一下考试。</p>
+<h1 id="CSP-S-2022"><a href="#CSP-S-2022" class="headerlink" title="CSP-S 2022"></a>CSP-S 2022</h1><p>上午进行最后的备考，狂敲各种模板。</p>
+<p>下午，Let it begin！</p>
+<h2 id="Day1-1"><a href="#Day1-1" class="headerlink" title="Day1"></a>Day1</h2><p>今年这密码有点离谱啊……belief2022……</p>
+<p>一遍敲对，十分舒适。</p>
+<p>看完四个题之后<del>断定都不可做</del>，然后看了下 T1 感觉前 40pts 极其好写，随便写写就过了样例（然而还是调了一会，原因是题没读清，下次读慢点。）</p>
+<p>T1 敲完 BF 后来看 T3，感觉不是很好写，回到 T2，由于我并不能推出这题的结论（太菜了啊），我就照着数据编程。发现几个限制条件下结论还是很好推的，限制 1 直接维护区间最大值和区间最小值就好了。</p>
+<p>但……为什么考场上玩的样例都对了但是民间自测爆 0 了……完蛋了。</p>
+<p>然后 T3 狂写一顿，用一个极其离谱的方法过了样例（我自己都不知道怎么过的）</p>
+<p>T4 就一顿乱写……胡过了样例，但是明显不大对劲。</p>
+<p>由于狂写 T3，T4 的 BF 导致 T2 的做法没时间查，结果很慌乱，导致没时间改，估计是没戏了。</p>
+<p>下次写完之后先检查再往下写吧……反正后面的分估计也拿不到，不如把前面的检查一下算了。</p>
+<p>完蛋了啊！！！！</p>
+<p>现在就指着 noip 打场翻身仗了！</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shelter Prime</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://dxrprime.github.io/2022/10/30/CSP-S2022/">http://dxrprime.github.io/2022/10/30/CSP-S2022/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>No <strong>SACRIFICE</strong>, no <strong>VICTORY</strong>!!!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/summary/"># summary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/10/28/%E5%BF%B5%E5%A5%B4%E5%A8%87%C2%B7Gxy%E7%9A%84BedWars/">念奴娇·Gxy 的 BedWars</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/gitalk/dist/gitalk.css">  
+<script src="/gitalk/dist/gitalk.min.js"></script>  
+<script src="/md5.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '0b0585b5051899c872936313348f9531451f6242',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: md5(location.pathname),
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true,  
+ proxy: 'https://dxrprime.the-last-prime.workers.dev/?https://github.com/login/oauth/access_token',
+ title: 'DxrPrime Shelter Comments'
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
