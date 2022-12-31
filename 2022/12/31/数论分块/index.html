@@ -194,6 +194,7 @@
 
         <div class="post-content">
             <p>很久没有写博文力。</p>
+<p>在 2022 年的最后一天发篇博文吧。</p>
 <p>何为数论分块？</p>
 <p>出现这种式子，直接数论分块：</p>
 <p>$\sum\limits_{i = 1}^{n} \left\lfloor\dfrac{n}{i}\right\rfloor$</p>
@@ -224,6 +225,12 @@
 <p>原题，但是注意 n = 0 的情况，否则您会当场 RE（。</p>
 <p>然后是这个：</p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2261">P2261</a></p>
+<p>把取模运算换一换，然后拆开算，左边能 $\mathcal{O}(1)$ 解决，右边是一个对于 k 的数论分块，考虑到乘的数不一样，直接换算成平均数乘总个数，做完力。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3935">P3935</a></p>
+<p>考虑如何快速求约数个数。</p>
+<p>约数个数无非就是 $\left\lfloor\dfrac{n}{i}\right\rfloor$。</p>
+<p>考虑 i 对于每一个倍数都产生贡献，因此每一个 i 的贡献就是 i 的倍数个数。</p>
+<p>接一个数论分块，问题解决。</p>
 
         </div>
 
