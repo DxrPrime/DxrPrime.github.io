@@ -258,13 +258,13 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>$\text{For\ in\ the\ end,\ I\ shall\ become\ the\ last\ one,\ who\ stand\ victories!}$</p>
+            <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>$\text{For in the end, I shall become the last one, who stand victories!}$</p>
 <p>翻译一下（<del>与原文极度不符，这边建议看原文</del>）：我记得我被这题恶心了 5 遍了，每一遍听都没透彻，第五遍An过后决心弄透彻掉，然后就明白了，然后就写篇题解纪念一下对这道题最终的胜利。</p>
 <h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>题目中有些城市是被保护着的，必须先解决掉所有保护它的城市才能解决掉它。</p>
 <p>初看并不好做，实际上我们可以考虑用到达它的时间和炸掉它的时间，这两者取 $\max$ 即为到达这座城市的实际时间。</p>
 <p>设到达第 $i$ 号城市的时间为 $\operatorname{arr_i}$，能进入（也即是<strong>将全部的防御炸光</strong>的时间）为 $\operatorname{ent_i}$。</p>
 <p>如果实际进程的时间为 $\operatorname{dis_i}$，那么根据定义可知：</p>
-<p>$\operatorname{dis_i} = \max{arr_i，ent_i}$</p>
+<p>$\operatorname{dis_i} = \max(arr_i，ent_i)$</p>
 <p>考虑到达一个点的实际情况是这样的：</p>
 <ol>
 <li><p>我们到了，但是防御没有全部攻破，这时候我们只能等待。</p>
@@ -275,12 +275,12 @@
 <p>这就是上式的原因。</p>
 <p>那么，$\operatorname{arr}$ 如何求呢？</p>
 <p>我们发现，到达一个点的时间就是实际进入起点的时间加上边权，这样我们求出了 $\operatorname{arr}$。</p>
-<p>$\operatorname{arr_v} = \min{\operatorname{arr_v}, \operatorname{dis_u + w}}$</p>
+<p>$\operatorname{arr_v} = \min(\operatorname{arr_v}, \operatorname{dis_u + w})$</p>
 <p>其实这就是个最短路的事，但我们要让其尽可能得小。</p>
 <p>$\operatorname{ent}$ 呢？</p>
 <p>考虑到击破全部防御的时间无非就是实际进入所有能防御这个城市的城市的时间，在这些实际时间里取 $\max$ 即可。</p>
 <p>注意，$\operatorname{ent}$ 数组不要初始化成正无穷！因为你要取 $\max$！</p>
-<p>$\operatorname{ent_v} = \max{\operatorname{ent_v}, \operatorname{dis_u}}$</p>
+<p>$\operatorname{ent_v} = \max(\operatorname{ent_v}, \operatorname{dis_u})$</p>
 <p>具体如何实现呢？</p>
 <p>我们直接在 $\text{Dijkstra}$ 的时候，更新 $\operatorname{arr}$，并更新 $\operatorname{ent}$，两者顺序无所谓，只要你在更新两者的同时不要忘记更新 $\operatorname{dis}$ 即可。</p>
 <p>最后，一定要<strong>读清</strong>题！</p>
