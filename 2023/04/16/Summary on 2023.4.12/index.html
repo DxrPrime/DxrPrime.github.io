@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Shelter Prime">
+
+
+
+
+
+<title>Summary on 2023.4.12 | Shelter Prime&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.jpeg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Summary on 2023.4.12</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Shelter Prime</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 16, 2023&nbsp;&nbsp;19:36:12</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/OI/">OI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h2><p>暴露出的问题是独立思考的能力不足，数学的基础不劳，D 的能力有亿点弱.</p>
+<p>主要就是思考能力欠缺，十分欠缺，以后多 VP 一点比赛吧.</p>
+<p>个人感觉难度：T3 &gt; T4 &gt; T2 &gt; T1，码力考察小，思考量也不是很大（<del>但虐死我足够了</del>）.</p>
+<p>不过思考能力有着明显的进步，这是好事，而且做题太少是不够的，以后要多做题.</p>
+<p>inv[i] = (p - p / i) * inv[i % p] % p;</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h3><p>会，不写了.</p>
+<h3 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h3><p>看到一个对着一个图进行修改的东西直接上去分层图就行了，这个方法一定要掌握.</p>
+<p>然后发现这是一个 01 最短路，然后我们上去 01BFS 即可解决问题.</p>
+<p>Code 很简单，不写了.</p>
+<h3 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h3><p>T3，看到整除考虑用质因子去思考.</p>
+<p>有两种方法，但是本质是一样的.</p>
+<h4 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h4><p>这个方法需要 da♂rk 力打表找规律，并且思路有一点阴间，更推荐法二.</p>
+<p>先考虑简单的问题，假如我们只用一个质数的 $i$ 次幂作为最后的结尾的数的数列有多少个.</p>
+<blockquote>
+<p>设 $dp_{i, j}$ 表示用 $i$ 次方，长度为 $j$ 的最后一个数列可以被 $p^i$ 表示的数列的个数.</p>
+</blockquote>
+<p><del>andy_lz 是真强，这种逆天的状态都能想出来.</del></p>
+<p>定住最后的 $a_j$，我们来思考如何递推：</p>
+<ul>
+<li>当$a_{j - 1} = p^i$ 的时候，发现定住了，那么这时候的数列数就只能是 $dp_{i, j - 1}$，因为数列本质上没有变化.</li>
+<li>当 $a_{j - 1} \ne p^i$ 的时候，发现这和 $a_{j} = p^{i - 1}$ 的情况下的数列是一样的.</li>
+</ul>
+<p>然后我们得到递推式：<br>$$<br>dp_{i, j} = dp_{i - 1, j} + dp_{i, j - 1}<br>$$<br>现在我们处理好了固定次幂下的数列个数，考虑下一步：如何扩展到多个质因子的次幂相乘的结果？</p>
+<p>发现对于同样的 $i$ 次幂，数列的个数是固定的，无论使用哪一个质因子做底数.（当这个指数在值域范围内的时候.）</p>
+<p>那么我们就可以直接考虑值域内的每一个数，它最终可以贡献出多少贡献.</p>
+<p>我们求完了 $i$ 次幂，然后我们直接考虑把 $x$ 这个数做结尾会贡献多少的数，而且它还会被不同的分解.</p>
+<p>假如 $x = a^i \times b^j$ 的话：</p>
+<blockquote>
+<p>以 $x$ 结尾的数的数列个数就是 $dp_{i, n} \times dp_{j, n}$，因为这样肯定最后能将 $x$ 乘出来，并且前边都是满足条件的数列.</p>
+</blockquote>
+<p>然后我们就可以对于每一个数，看一下它可以分解为某个质因子的多少的幂次方，然后乘上对应的答案数，最后把每个数的贡献总和加到一起，这样就解决了这个问题.</p>
+<h5 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">rd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(c &lt; <span class="string">&#x27;0&#x27;</span> || c &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line">ll dp[<span class="number">25</span>][N];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">ll sum[N], ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot;</span><br><span class="line">ll pr[N];</span><br><span class="line"><span class="keyword">bool</span> np[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// freopen(&quot;count.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;count.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    </span><br><span class="line">    n = <span class="built_in">rd</span>(), m = <span class="built_in">rd</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">20</span>; ++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            dp[i][j] = (dp[i][j - <span class="number">1</span>] + dp[i - <span class="number">1</span>][j]) % mod;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i * i &lt;= m; ++i)</span><br><span class="line">        <span class="keyword">if</span>(!np[i]) &#123;</span><br><span class="line">            pr[++tot] = i;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i * <span class="number">2</span>; j * j &lt;= m; j += i)</span><br><span class="line">                np[j] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        sum[i] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = i, cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; tmp &gt; <span class="number">1</span> &amp;&amp; j &lt;= tot; ++j) &#123;</span><br><span class="line">            cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>( !(tmp % pr[j] ) )</span><br><span class="line">                tmp /= pr[j], ++cnt;</span><br><span class="line">            </span><br><span class="line">            sum[i] = (sum[i] * dp[cnt][n]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(tmp &gt; <span class="number">1</span>)</span><br><span class="line">            sum[i] = (sum[i] * dp[<span class="number">1</span>][n]) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        ans = (ans + sum[i]) % mod;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">fclose</span>(stdin);</span><br><span class="line">    <span class="built_in">fclose</span>(stdout);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">3 4</span></span><br><span class="line"><span class="comment">20 30</span></span><br><span class="line"><span class="comment">200000 200000</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h4><p>想要达到互质的效果，我们不妨也考虑最后的数是哪一个数.</p>
+<p>最后的数肯定可以分解为一个算术基本定理的形式，我们用这个做一点事情：</p>
+<blockquote>
+<p>若干个质因子相乘，我们将这些质因子随机地放在前面的几个位置上，这是一个组合数问题，然后我们只需要将这些数从头到尾乘过来，不难满足题目要求.</p>
+</blockquote>
+<p>然后我们只需要处理组合数，然后处理逆元，然后做完了.</p>
+<p>这个思路还是比较好推的，更推荐这个做法.</p>
+<h5 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h5><p>PS：此为 L_ndyz 的代码，博主懒得自己写一份了（，声明一下版权.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> p=<span class="number">998244353</span>,ans=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> inv[<span class="number">2000100</span>],A[<span class="number">2000100</span>];</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;y) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> A[y]*inv[x]%p*inv[y-x]%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sol</span><span class="params">(<span class="keyword">int</span> now)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i*i&lt;=now;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(now%i==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(now%i==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				now/=i;cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">			sum=sum*<span class="built_in">C</span>(n<span class="number">-1</span>,cnt+n<span class="number">-1</span>)%p;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(now&gt;<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt=<span class="number">1</span>;</span><br><span class="line">		sum=sum*<span class="built_in">C</span>(n<span class="number">-1</span>,cnt+n<span class="number">-1</span>)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	ans=(ans+sum)%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//	 freopen(&quot;gift.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line"><span class="comment">//	 freopen(&quot;gift.out&quot;,&quot;w&quot;,stdout);</span></span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	A[<span class="number">0</span>]=A[<span class="number">1</span>]=inv[<span class="number">0</span>]=inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n*<span class="number">5</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		inv[i]=(p-p/i)*inv[p%i]%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n*<span class="number">5</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		A[i]=(A[i<span class="number">-1</span>]*i)%p;inv[i]=(inv[i<span class="number">-1</span>]*inv[i])%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">sol</span>(i);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans;</span><br><span class="line">	<span class="built_in">fclose</span>(stdin);</span><br><span class="line">	<span class="built_in">fclose</span>(stdout);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h3><p>拿到异或，肯定是要拆位考虑的.</p>
+<p>想要总和为 $m$，并且每一个二进制位上的 1 的个数都为偶数，不妨按照每一个二进制位考虑，这样能够很方便地保证偶数的限制.</p>
+<p>因为一个二进制位会对应 $n$ 个下标位置，而这些下标位置我们是可以随意摆放的，也就是从 $n$ 个物品中选择 $i$ 个物品，这是一个组合数问题，使用杨辉三角 $\mathcal{O}(n^2)$ 即可处理组合数.</p>
+<p>然后我们就可以快乐地开搜，然后我们接一个记忆化上去，这样就可以快速地解决这个问题了.</p>
+<h4 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">rd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll x = <span class="number">0</span>, w = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(c &lt; <span class="string">&#x27;0&#x27;</span> || c &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) w = <span class="number">-1</span>;</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">        x = x * <span class="number">10</span> + (c - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        c = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5005</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line">ll dp[<span class="number">25</span>][N];</span><br><span class="line">ll n, m, C[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll pos, ll res)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(dp[pos][res]) <span class="keyword">return</span> dp[pos][res];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(pos == <span class="number">0</span>) <span class="keyword">return</span> dp[pos][res] = C[n][res];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(ll i = <span class="number">0</span>; (<span class="number">1</span> &lt;&lt; pos) * i &lt;= res; i += <span class="number">2</span>)</span><br><span class="line">        dp[pos][res] = (dp[pos][res] + <span class="built_in">dfs</span>(pos - <span class="number">1</span>, res - (<span class="number">1</span> &lt;&lt; pos) * i) % mod * C[n][i] % mod) % mod;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dp[pos][res];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// freopen(&quot;gift.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;gift.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    </span><br><span class="line">    n = <span class="built_in">rd</span>(), m = <span class="built_in">rd</span>();</span><br><span class="line">    <span class="keyword">if</span>(m % <span class="number">2</span>) <span class="built_in">printf</span>(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        C[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            C[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j)</span><br><span class="line">                C[i][j] = (C[i - <span class="number">1</span>][j] + C[i - <span class="number">1</span>][j - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">dfs</span>(<span class="number">19</span>, m));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// fclose(stdin);</span></span><br><span class="line">    <span class="comment">// fclose(stdout);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Somthing-Else"><a href="#Somthing-Else" class="headerlink" title="Somthing Else"></a>Somthing Else</h2><ul>
+<li><del>这次考试是我安排的.</del></li>
+<li><del>题目是我选的，但我不知道题目的具体内容.</del></li>
+<li><del>所以为什么 Ptilopsis_w 一个学图论的会出两个数学题啊.</del></li>
+<li><del>后来知道被骗了，这是 Jekyll_Y 的题.</del></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Shelter Prime</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://dxrprime.github.io/2023/04/16/Summary%20on%202023.4.12/">http://dxrprime.github.io/2023/04/16/Summary%20on%202023.4.12/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>No <strong>SACRIFICE</strong>, no <strong>VICTORY</strong>!!!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/summary/"># summary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2023/03/19/%E6%98%A5%E5%AD%A3%E8%81%94%E8%B5%9B2023/">我在 2023 春季测试的故事</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/gitalk/dist/gitalk.css">  
+<script src="/gitalk/dist/gitalk.min.js"></script>  
+<script src="/md5.min.js"></script>  
+<div id="gitalk-container"></div>  
+<script type="text/javascript">  
+ var gitalk = new Gitalk({  
+ clientID: 'd3009a5e8d9c427df8ba',  
+ clientSecret: '0b0585b5051899c872936313348f9531451f6242',  
+ repo: 'DxrPrime.github.io',  
+ owner: 'DxrPrime',  
+ admin: 'DxrPrime',  
+ id: md5(location.pathname),
+ labels: 'gitalk'.split(',').filter(l => l),  
+ perPage: 15,  
+ pagerDirection: 'last',  
+ createIssueManually: true,  
+ distractionFreeMode: true,  
+ proxy: 'https://dxrprime.the-last-prime.workers.dev/?https://github.com/login/oauth/access_token',
+ title: 'DxrPrime Shelter Comments'
+ })  
+ gitalk.render('gitalk-container')  
+</script>  
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
