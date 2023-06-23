@@ -1,245 +1,1020 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
 
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/a.jpeg">
+  <link rel="icon" href="/image/a.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#447EA5">
+  <meta name="author" content="Shelter Prime">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Shelter Prime&#39;s Blog">
+<meta property="og:url" content="http://dxrprime.github.io/index.html">
+<meta property="og:site_name" content="Shelter Prime&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Shelter Prime">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Shelter Prime&#39;s Blog</title>
 
-    <meta name="author" content="Shelter Prime">
-
-
-    <meta name="subtitle" content="Lock and load.">
-
-
-    <meta name="description" content="OI 加油! Shelter Prime 加油!">
-
-
-
-<title>Shelter Prime&#39;s Blog</title>
-
-
-
-    <link rel="icon" href="/favicon.jpeg">
-
-
-
-
-    <!-- stylesheets list from _config.yml -->
-    
-    <link rel="stylesheet" href="/css/style.css">
-    
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-    <!-- scripts list from _config.yml -->
-    
-    <script src="/js/script.js"></script>
-    
-    <script src="/js/tocbot.min.js"></script>
-    
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
-    
-    
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="/mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-    
+<link  rel="stylesheet" href="/css/main.css" />
 
 
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dxrprime.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
 <meta name="generator" content="Hexo 6.0.0"></head>
 
-<body>
-    <script>
-        // this function is used to check current theme before page loaded.
-        (() => {
-            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
-            const isDark = currentTheme === 'dark';
-            const pagebody = document.getElementsByTagName('body')[0]
-            if (isDark) {
-                pagebody.classList.add('dark-theme');
-                // mobile
-                //document.getElementById("mobile-toggle-theme").innerText = "· Dark"
-            } else {
-                pagebody.classList.remove('dark-theme');
-                // mobile
-                //document.getElementById("mobile-toggle-theme").innerText = "· Light"
-            }
-        })();
-    </script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'">
 
-    <div class="wrapper">
-        <header>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-header header-logo"><a href="/">Napoleon_Bonaparte&#39;s Blog</a></div>
-            <div class="menu navbar-right">
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-                <input id="switch_default" type="checkbox" class="switch_default">
-                <label for="switch_default" class="toggleBtn"></label>
-            </div>
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shelter_Prime&#39;s Blog.</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/image/a.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Let&#39;s roll."></span>
+          
         </div>
-    </nav>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/04/16/Summary%20on%202023.4.12/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="Summary on 2023.4.12">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/16/Summary%20on%202023.4.12/" target="_self">
+          Summary on 2023.4.12
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2023/04/16/Summary%20on%202023.4.12/" target="_self">
+        <div>
+          Reflection暴露出的问题是独立思考的能力不足，数学的基础不劳，D 的能力有亿点弱. 主要就是思考能力欠缺，十分欠缺，以后多 VP 一点比赛吧. 个人感觉难度：T3 &gt; T4 &gt; T2 &gt; T1，码力考察小，思考量也不是很大（但虐死我足够了）. 不过思考能力有着明显的进步，这是好事，而且做题太少是不够的，以后要多做题. inv[i] = (p - p / i) * inv[
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-16 19:36" pubdate>
+              2023-04-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/03/19/%E6%98%A5%E5%AD%A3%E8%81%94%E8%B5%9B2023/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="我在 2023 春季测试的故事">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/19/%E6%98%A5%E5%AD%A3%E8%81%94%E8%B5%9B2023/" target="_self">
+          我在 2023 春季测试的故事
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2023/03/19/%E6%98%A5%E5%AD%A3%E8%81%94%E8%B5%9B2023/" target="_self">
+        <div>
+          Day1‽ 监考老师是大舌头，“向 CCF 实名投漱”。 电脑时间不对，居然还停留在 2013 年 1 月 1 日（ 读完一遍题之后发现 CCF 的题诙谐多了（ 看到 T1 之后发现蛮简单的，用时间戳的思想就可以跑过。 然后 30min 敲完，自测 100pts。 来到 T2，发现不是很好做，就先来了一手 1e6 的数据，用调和级数做过去了，自测 30pts 到手。 然后开始思考 1e8，正面做不
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-19 18:25" pubdate>
+              2023-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/02/02/Fall%202019%20ICPC-style%20Waterloo%20Local%20Contest%EF%BC%8CD/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="Fall 2019 ICPC-style Waterloo Local Contest，D">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/02/02/Fall%202019%20ICPC-style%20Waterloo%20Local%20Contest%EF%BC%8CD/" target="_self">
+          Fall 2019 ICPC-style Waterloo Local Contest，D
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2023/02/02/Fall%202019%20ICPC-style%20Waterloo%20Local%20Contest%EF%BC%8CD/" target="_self">
+        <div>
+          谨以此博文，纪念 L_fire 的逝去，L_ndyz 的诞生。 一篇博文需要一张头图：  Fall 2019 ICPC-style Waterloo Local Contest，D ICPC 的题啊，还是 D 题啊，果然不简单（ Link Background集训的时候 Ptilopsis_w 找我，让我去找 wljss，说让 wljss 看他的私信。 然后我就去了，强行阻止了正在玩游戏的 wlj
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-02 19:08" pubdate>
+              2023-02-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Data-Structure/">#Data Structure</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/02/02/2023.1.30/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="2023.1.30 整理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/02/02/2023.1.30/" target="_self">
+          2023.1.30 整理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2023/02/02/2023.1.30/" target="_self">
+        <div>
+          $\mathcal{Let’s\ roll.}$ 谨以此博文，纪念 L_fire。 没想到 2023 年一个月过去了才重新开始写（ 之前断更的有点厉害啊。 考的还算说的过去吧。 T1 签到题，T2 概率期望，T3 是奇妙的数据结构，T4 是模拟接高精。 问题就是一些学过的东西复习不够及时，一些套路还不是很会。 想期望的能力还是太烂了，多学学吧。 码力倒提升了点，至少模拟能敲出来了。（ T1 不写了
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-02 07:18" pubdate>
+              2023-02-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/01/30/P2446%E3%80%90%E5%A4%A7%E9%99%86%E4%BA%89%E9%9C%B8%E3%80%91%E9%A2%98%E8%A7%A3/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="题解：P2446【大陆争霸】">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/01/30/P2446%E3%80%90%E5%A4%A7%E9%99%86%E4%BA%89%E9%9C%B8%E3%80%91%E9%A2%98%E8%A7%A3/" target="_self">
+          题解：P2446【大陆争霸】
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2023/01/30/P2446%E3%80%90%E5%A4%A7%E9%99%86%E4%BA%89%E9%9C%B8%E3%80%91%E9%A2%98%E8%A7%A3/" target="_self">
+        <div>
+          Background$\text{For in the end, I shall become the last one, who stand victories!}$ 翻译一下（与原文极度不符，这边建议看原文）：我记得我被这题恶心了 5 遍了，每一遍听都没透彻，第五遍An过后决心弄透彻掉，然后就明白了，然后就写篇题解纪念一下对这道题最终的胜利。 Analysis题目中有些城市是被保护着的，必须先
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-30 19:39" pubdate>
+              2023-01-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/12/31/%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="数论分块">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/12/31/%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97/" target="_self">
+          数论分块
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/12/31/%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97/" target="_self">
+        <div>
+          很久没有写博文力。 在 2022 年的最后一天发篇博文吧。 何为数论分块？ 出现这种式子，直接数论分块： $\sum\limits_{i = 1}^{n} \left\lfloor\dfrac{n}{i}\right\rfloor$ 不难发现朴素的方法是 $\mathcal{O}(n)$。 但这样直接搞是会 van 的。 正确的操作是使用数论分块，达到 $\mathcal{O}(\sqrt{n}
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-12-31 21:13" pubdate>
+              2022-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mathematics/">#Mathematics</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/30/CSP-S2022/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="我在 CSP-S 2022 的故事">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/30/CSP-S2022/" target="_self">
+          我在 CSP-S 2022 的故事
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/10/30/CSP-S2022/" target="_self">
+        <div>
+          PreparationDay1整体目标：练习枚举，搜索等暴力骗分手段。 上午：袁野课程，模拟，搜索， DP， 复习模板。 下午：练习，然后就是 numb。 晚上听 whk。 Day2上午打了场洛谷月赛的 J 组，260 pts，感觉不太行。 下午本来计划比赛 S 组，但是题太难了直接摆烂，学一下午 DP，结果 numb 了，晚上乱搞了点 WSL 和 gdb，挺快乐。 回宿舍的时候嫖了点吃的，差点让
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-30 13:25" pubdate>
+              2022-10-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="2022.10.27 整理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/" target="_self">
+          2022.10.27 整理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/10/27/2022.10.27%E6%95%B4%E7%90%86/" target="_self">
+        <div>
+          Problems算是第一次线下做 S 组模拟题吧（其实并不知道具体难度是在 S 还是在省选，不过个人感觉就是个 S 组，虽然只有三个题），但是我就相当于一个旁观者，所以也没有测评代码，纯属自行估分。 感觉自己不会的东西还是非常多的，比如数据结构会但是想不到怎么用，想正解的能力还是太差了，如果碰上个简单的 T1（指能用 BF 干对的或是稍微预处理点就行的）可能还有救，然而概率太低了。 总之多写写结论
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-27 19:24" pubdate>
+              2022-10-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/18/DP%20%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="DP 练习记录">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/18/DP%20%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
+          DP 练习记录
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/10/18/DP%20%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          P4310类似最长上升子序列，我们可以推出以下式子： $\text{dp} = \max{dp_j + 1}, j &lt; i$ 并且 a[i] &amp; a[j] 不为 0。（为什么不写进 $\LaTeX$ 呢？因为新博文的并不支持 &amp; 这个东西，一用就挂。） 考虑位运算的特性，每一位并不相关，那么我们可以让 $dp_i$ 表示 二进制下第 i 位为  1 的最大值，这样我们每次找到
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-18 09:22" pubdate>
+              2022-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/10/14/2022.10.12%E6%95%B4%E7%90%86/" target="_self">
+          <img src="/image/b.jpeg" srcset="/img/loading.gif" lazyload alt="2022.10.12 整理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/14/2022.10.12%E6%95%B4%E7%90%86/" target="_self">
+          2022.10.12 整理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/10/14/2022.10.12%E6%95%B4%E7%90%86/" target="_self">
+        <div>
+          问题基础的二分答案掌握尚不牢固（太丢人了）。 实际问题考虑不周全（更丢人了，甚至不和 0 取 $\max​$）。 码力还是不够强，斗地主没两个月就写不出来了（更进一步的丢人了）。 DP 还是弄不出来，还是得练。 SolutionP2678 这居然还不能全对着实丢大人了。 具体错误： 上来没有快速排序，石头的位置并不是有序的！ check 函数中判断石头挪走后，没有正确处理该和哪一个石头对比距离，应
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-14 22:49" pubdate>
+              2022-10-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OI/" class="category-chain-item">OI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/summary/">#summary</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
 
     
-    <nav class="navbar-mobile" id="nav-mobile">
-        <div class="container">
-            <div class="navbar-header">
-                <div>
-                    <a href="/">Napoleon_Bonaparte&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
-                </div>
-                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
-            </div>
-            <div class="menu" id="mobile-menu">
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-            </div>
-        </div>
-    </nav>
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-</header>
-<script>
-    var mobileBtn = function f() {
-        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
-        var mobileMenu = document.getElementById("mobile-menu");
-        if(toggleMenu.classList.contains("active")){
-           toggleMenu.classList.remove("active")
-            mobileMenu.classList.remove("active")
-        }else{
-            toggleMenu.classList.add("active")
-            mobileMenu.classList.add("active")
-        }
-    }
-</script>
-            <div class="main">
-                
-    <div class="container profile-container">
-    <div class="intro">
-        <div class="avatar">
-            <a href="/archives"><img src="/image/b.jpeg"></a>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
-        <div class="nickname">Shelter Prime</div>
-        <div class="description"><p>I can work well under pressure and enjoy challenges.</p>
-</div>
-        <div class="links">
-            
-                
-                    <a class="link-item" title="Blog" href="/archives">
-                        
-                        
-                            <i class="iconfont icon-blog"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Category" href="/category">
-                        
-                        
-                            <i class="iconfont icon-category"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Tags" href="/tag">
-                        
-                        
-                            <i class="iconfont icon-tags"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Link" href="/Notice">
-                        
-                        
-                            <i class="iconfont icon-link"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="FaceBook" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=100082825023566">
-                        
-                        
-                            <i class="iconfont icon-facebook"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Twitter" target="_blank" rel="noopener" href="https://twitter.com/DxrPrime">
-                        
-                        
-                            <i class="iconfont icon-twitter"></i>
-                        
-                    </a>
-                
-                    <a class="link-item" title="Github" target="_blank" rel="noopener" href="https://github.com/DxrPrime">
-                        
-                        
-                            <i class="iconfont icon-github"></i>
-                        
-                    </a>
-                
-            
-        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
 </div>
 
+    
 
-            </div>
-            <footer id="footer" class="footer">
-    <div class="copyright">
-        <span>© Shelter Prime | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
-    </div>
-</footer>
+    
+  </main>
 
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
-
 </html>
