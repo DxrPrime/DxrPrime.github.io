@@ -771,7 +771,7 @@ html {
 html,
 body {
   height: 100%;
-  font-family: var(--font-family-sans-serif);
+  font-family: LXGW Wenkai Screen;
   overflow-wrap: break-word;
 }
 body {
@@ -844,7 +844,7 @@ i.iconfont {
   --link-hover-color: #30a9de;
   --link-hover-bg-color: #f8f9fa;
   --line-color: #eaecef;
-  --navbar-bg-color: #2f4154;
+  --navbar-bg-color: #447EA5;
   --navbar-text-color: #fff;
   --subtitle-color: #fff;
   --scrollbar-color: #c4c6c9;
@@ -1319,7 +1319,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: var(--font-family-sans-serif);
+  font-family: LXGW Wenkai Screen;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }

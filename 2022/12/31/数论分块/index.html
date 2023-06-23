@@ -321,11 +321,11 @@
 <p>$r = \left\lfloor\dfrac{n}{k}\right\rfloor = \left\lfloor\dfrac{n}{\left\lfloor\dfrac{n}{l}\right\rfloor}\right\rfloor$</p>
 <p>注意！这里不能直接让 r = l！因为这些都是整数下的除法并且加了向下取整！</p>
 <p>举个简单的例子：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> / (<span class="number">10</span> / <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-number">10</span> / (<span class="hljs-number">10</span> / <span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
 
 <p>考虑到向下取整，这个得数是 5，如果直接等于过去则会是 4！喜爆。</p>
 <p>这样有了左右端点又有了单点值，我想是人就能弄出来了吧：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">1</span>, r; l &lt;= n; l = r + <span class="number">1</span>) &#123;</span><br><span class="line">    r = n / (n / l);</span><br><span class="line">    ans = ans + (r - l + <span class="number">1</span>) * (n / l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l = <span class="hljs-number">1</span>, r; l &lt;= n; l = r + <span class="hljs-number">1</span>) &#123;<br>    r = n / (n / l);<br>    ans = ans + (r - l + <span class="hljs-number">1</span>) * (n / l);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>现在您已经入门力！</p>
 <p>上点题吧：</p>
